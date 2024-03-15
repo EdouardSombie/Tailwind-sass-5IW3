@@ -13,7 +13,7 @@ $containerSizes: (
 	padding: 0 1rem;
 	margin: auto;
 	@each $name, $size in v.$breakpoints {
-		@media screen and (min-width: $size) {
+		@media (width >= $size) {
 			width: map.get($containerSizes, $name);
 		}
 	}
