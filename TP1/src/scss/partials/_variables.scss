@@ -25,6 +25,7 @@ $colors: (
 $mainRadius: f.rem(16);
 
 :root {
+	// Couleurs //
 	@each $name, $value in $colors {
 		@if ($name != "white" and $name != "black") {
 			@for $i from 0 through 10 {
@@ -44,5 +45,14 @@ $mainRadius: f.rem(16);
 			--#{$name}: #{$value};
 		}
 	}
+
+	// Couleurs agnostiques //
+	--body-bg-color: var(--white);
+	--text-color: var(--black);
+	@media (prefers-color-scheme: dark) {
+		--body-bg-color: var(--black);
+		--text-color: var(--white);
+	}
+
 	--main-radius: #{$mainRadius};
 }

@@ -232,6 +232,8 @@ summary {
 
 body {
   font-family: "Istok Web", sans-serif;
+  background-color: var(--body-bg-color);
+  color: var(--text-color);
 }
 
 img {
@@ -290,7 +292,15 @@ p {
   --green-800: #005b5b;
   --green-900: #003232;
   --green-950: #000909;
+  --body-bg-color: var(--white);
+  --text-color: var(--black);
   --main-radius: 1rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-bg-color: var(--black);
+    --text-color: var(--white);
+  }
 }
 
 .mt-0 {
@@ -380,6 +390,16 @@ p {
 }
 
 .bioCard {
+  --bg-color: var(--blue-900);
+  --gradient-color1: var(--green-400);
+  --gradient-color2: var(--green-500);
+  --gradient-color3: var(--pink-500);
+  --gradient-color4: var(--orange-400);
+  --button-color1: var(--pink-500);
+  --button-color2: var(--black);
+  --hr-opacity: 1;
+  --image-filter: saturate(0);
+  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -388,11 +408,23 @@ p {
   gap: 0;
   width: 20rem;
   border-radius: var(--main-radius);
-  background-color: var(--blue-800);
   color: var(--blue-500);
   overflow: hidden;
   position: relative;
   padding: 2rem;
+}
+@media (prefers-color-scheme: dark) {
+  .bioCard {
+    --bg-color: var(--white);
+    --gradient-color1: var(--pink-500);
+    --gradient-color2: var(--orange-400);
+    --gradient-color3: var(--green-400);
+    --gradient-color4: var(--green-500);
+    --button-color1: var(--blue-500);
+    --button-color2: var(--white);
+    --hr-opacity: 0.5;
+    --image-filter: saturate(1);
+  }
 }
 .bioCard__header {
   position: absolute;
@@ -414,7 +446,7 @@ p {
   object-fit: cover;
   width: 11rem;
   align-self: center;
-  filter: saturate(0);
+  filter: var(--image-filter);
   margin-bottom: 1.5rem;
 }
 .bioCard__h1 {
@@ -422,7 +454,7 @@ p {
   margin-bottom: 0.75rem;
   line-height: 1;
   text-align: center;
-  background: linear-gradient(to bottom, var(--pink-500) 0%, var(--orange-300) 100%);
+  background: linear-gradient(to bottom, var(--gradient-color3) 0%, var(--gradient-color4) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -437,9 +469,71 @@ p {
   margin-bottom: 1rem;
   width: 100%;
   border-color: var(--blue-500);
+  border-bottom: none;
+  opacity: var(--hr-opacity);
 }
 .bioCard__p {
   text-align: center;
+  margin: 0 0 3rem;
+}
+.bioCard__footer {
+  position: relative;
+}
+.bioCard__footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: -2rem;
+  margin-bottom: -3.125rem;
+  background: linear-gradient(-187deg, var(--gradient-color4) -20%, var(--gradient-color3) 50%);
+  transform: skewY(7deg);
+}
+.bioCard__ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+.bioCard__a {
+  display: inline-flex;
+  width: 2rem;
+  aspect-ratio: 1/1;
+  border-radius: 50rem;
+  background: var(--white);
+}
+.bioCard__a svg {
+  margin: auto;
+  height: 50%;
+  width: auto;
+}
+.bioCard__a svg path {
+  fill: var(--button-color1);
+}
+.bioCard__a--alt {
+  display: inline-flex;
+  width: 2rem;
+  aspect-ratio: 1/1;
+  border-radius: 50rem;
+  background: linear-gradient(to bottom, var(--gradient-color1), var(--gradient-color2));
+}
+.bioCard__a--alt svg {
+  margin: auto;
+  height: 50%;
+  width: auto;
+  height: auto;
+  width: 75%;
+}
+.bioCard__a--alt svg path {
+  fill: var(--button-color2);
 }
 
 /*# sourceMappingURL=main.css.map */

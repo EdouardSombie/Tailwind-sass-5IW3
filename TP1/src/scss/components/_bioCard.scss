@@ -1,10 +1,34 @@
 @use "../partials/mixins" as m;
 @use "../partials/functions" as f;
 .bioCard {
+	// Variables "locales"
+	--bg-color: var(--blue-900);
+	--gradient-color1: var(--green-400);
+	--gradient-color2: var(--green-500);
+	--gradient-color3: var(--pink-500);
+	--gradient-color4: var(--orange-400);
+	--button-color1: var(--pink-500);
+	--button-color2: var(--black);
+	--hr-opacity: 1;
+	--image-filter: saturate(0);
+	@media (prefers-color-scheme: dark) {
+		--bg-color: var(--white);
+		--gradient-color1: var(--pink-500);
+		--gradient-color2: var(--orange-400);
+		--gradient-color3: var(--green-400);
+		--gradient-color4: var(--green-500);
+		--button-color1: var(--blue-500);
+		--button-color2: var(--white);
+		--hr-opacity: 0.5;
+		--image-filter: saturate(1);
+	}
+
+	background-color: var(--bg-color);
+
 	@include m.flexbox(column, nowrap, flex-start, stretch);
 	width: f.rem(320);
 	border-radius: var(--main-radius);
-	background-color: var(--blue-800);
+
 	color: var(--blue-500);
 	overflow: hidden;
 	position: relative;
@@ -23,7 +47,7 @@
 		object-fit: cover;
 		width: f.rem(176);
 		align-self: center;
-		filter: saturate(0);
+		filter: var(--image-filter);
 		margin-bottom: f.rem(24);
 	}
 	&__h1 {
@@ -31,7 +55,11 @@
 		margin-bottom: f.rem(12);
 		line-height: 1;
 		text-align: center;
-		@include m.textGradient(bottom, var(--pink-500), var(--orange-300));
+		@include m.textGradient(
+			bottom,
+			var(--gradient-color3),
+			var(--gradient-color4)
+		);
 	}
 	&__h2 {
 		margin-top: 0;
@@ -44,8 +72,49 @@
 		margin-bottom: f.rem(16);
 		width: 100%;
 		border-color: var(--blue-500);
+		border-bottom: none;
+		opacity: var(--hr-opacity);
 	}
 	&__p {
 		text-align: center;
+		margin: 0 0 f.rem(48);
+	}
+	&__footer {
+		position: relative;
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: f.rem(-32); // Permet à l'élément de déborder de son parent
+			margin-bottom: f.rem(-50); // Pour bien remplir le bas de la card
+			background: linear-gradient(
+				-187deg,
+				var(--gradient-color4) -20%,
+				var(--gradient-color3) 50%
+			);
+			transform: skewY(7deg);
+		}
+	}
+	&__ul {
+		@include m.resetList;
+		@include m.flexbox(row, nowrap, center, center, f.rem(24));
+		position: relative;
+	}
+	&__a {
+		@include m.pillButton(var(--white), var(--button-color1));
+		&--alt {
+			@include m.pillButton(
+				linear-gradient(
+					to bottom,
+					var(--gradient-color1),
+					var(--gradient-color2)
+				),
+				var(--button-color2),
+				true
+			);
+		}
 	}
 }

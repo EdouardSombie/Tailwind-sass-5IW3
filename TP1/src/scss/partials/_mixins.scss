@@ -1,3 +1,5 @@
+@use "functions" as f;
+
 @mixin flexbox($direction, $wrap, $justify, $align, $gap: 0) {
 	display: flex;
 	flex-direction: $direction;
@@ -20,4 +22,30 @@
 	);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+}
+
+@mixin resetList {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+@mixin pillButton($background, $color, $bigIcon: false) {
+	display: inline-flex;
+	width: f.rem(32);
+	aspect-ratio: 1/1;
+	border-radius: 50rem; // valeur tjs plus grande qu'un des côtés de l'lément
+	background: $background;
+	svg {
+		margin: auto;
+		height: 50%;
+		width: auto;
+		@if ($bigIcon) {
+			height: auto;
+			width: 75%;
+		}
+		path {
+			fill: $color;
+		}
+	}
 }
